@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bana & Haidar | Ayami Maak</title>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --pink: #ff4d6d;
+            --glass: rgba(255, 255, 255, 0.2);
+        }
+
+        body {
+            background: linear-gradient(180deg, #ffafbd 0%, #ffc3a0 100%);
+            height: 100vh;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-family: 'Poppins', sans-serif;
+            overflow: hidden;
+        }
+
+        /* القلوب المتساقطة */
+        .heart-particle {
+            position: fixed;
+            top: -10vh;
+            user-select: none;
+            pointer-events: none;
+            z-index: 999;
+            animation: fall linear forwards;
+        }
+
+        @keyframes fall {
+            to { transform: translateY(110vh) rotate(360deg); opacity: 0; }
+        }
+
+        .card {
+            background: var(--glass);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.4);
+            border-radius: 30px;
+            padding: 40px 20px;
+            text-align: center;
+            width: 320px;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.1);
+            z-index: 10;
+        }
+
+        .lollipop {
+            font-size: 50px;
+            background: white;
+            width: 80px;
+            height: 80px;
+            line-height: 80px;
+            border-radius: 50%;
+            margin: 0 auto 20px;
+            box-shadow: 0 10px 20px rgba(255, 77, 109, 0.2);
+        }
+
+        h1 {
+            font-family: 'Dancing Script', cursive;
+            color: white;
+            font-size: 2.2rem;
+            margin: 0;
+        }
+
+        .timer-container {
+            display: flex;
+            justify-content: space-around;
+            background: rgba(255, 255, 255, 0.3);
+            border-radius: 15px;
+            padding: 15px 5px;
+            margin: 20px 0;
+        }
+
+        .timer-unit { flex: 1; }
+        .timer-val { display: block; font-size: 1.1rem; font-weight: bold; color: var(--pink); }
+        .timer-label { font-size: 0.6rem; color: #666; text-transform: uppercase; }
+
+        .btn-update {
+            background: var(--pink);
+            color: white;
+            border: none;
+            padding: 15px;
+            border-radius: 50px;
+            font-weight: bold;
+            cursor: pointer;
+            width: 100%;
+            font-size: 1rem;
+            box-shadow: 0 5px 15px rgba(255, 77, 109, 0.3);
+            transition: 0.3s;
+        }
+
+        .btn-update:hover { transform: scale(1.02); background: #ff758f; }
+    </style>
+</head>
+<body>
+
+    <audio id="loveSong" loop>
+        <source src="https://www.mboxdrive.com/Ayami%20Maak.mp3" type="audio/mpeg">
+        Your browser does not support the audio element.
+    </audio>
+
+    <div class="card">
+        <div class="lollipop">🍭</div>
+        <h1 id="title">Hi, Bonbonte!</h1>
+        <p style="color: white; font-size: 0.9rem;">Bana, you are my favorite line of code.</p>
+
+        <div class="timer-container">
+            <div class="timer-unit"><span class="timer-val" id="days">00</span><span class="timer-label">Days</span></div>
+            <div class="timer-unit"><span class="timer-val" id="hours">00</span><span class="timer-label">Hrs</span></div>
+            <div class="timer-unit"><span class="timer-val" id="mins">00</span><span class="timer-label">Mins</span></div>
+            <div class="timer-unit"><span class="timer-val" id="secs">00</span><span class="timer-label">Secs</span></div>
+        </div>
+
+        <button class="btn-update" onclick="startSurprise()">SEND LOVE ❤️</button>
+    </div>
+
+    <script>
+        // ضبط التاريخ: 14 أبريل 2024
+        const startDate = new Date(2024, 3, 14, 0, 0, 0);
+
+        function updateTimer() {
+            const now = new Date();
+            const diff = now - startDate;
+            document.getElementById('days').innerText = Math.floor(diff / 86400000).toString().padStart(2, '0');
+            document.getElementById('hours').innerText = Math.floor((diff / 3600000) % 24).toString().padStart(2, '0');
+            document.getElementById('mins').innerText = Math.floor((diff / 60000) % 60).toString().padStart(2, '0');
+            document.getElementById('secs').innerText = Math.floor((diff / 1000) % 60).toString().padStart(2, '0');
+        }
+        setInterval(updateTimer, 1000);
+        updateTimer();
+
+        function startSurprise() {
+            // تشغيل الأغنية
+            const song = document.getElementById('loveSong');
+            song.play().catch(e => console.log("Playback interaction needed"));
+
+            // إمطار القلوب في كل مكان
+            for(let i=0; i<50; i++) {
+                setTimeout(() => {
+                    const heart = document.createElement('div');
+                    heart.className = 'heart-particle';
+                    heart.innerHTML = ['❤️', '💖', '🍭', '🌸'][Math.floor(Math.random() * 4)];
+                    heart.style.left = Math.random() * 100 + 'vw';
+                    heart.style.fontSize = (Math.random() * 30 + 15) + 'px';
+                    const duration = Math.random() * 3 + 2;
+                    heart.style.animationDuration = duration + 's';
+                    document.body.appendChild(heart);
+                    setTimeout(() => heart.remove(), duration * 1000);
+                }, i * 100);
+            }
+        }
+    </script>
+</body>
+</html>
