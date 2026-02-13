@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bonbonte | Secret Script</title>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600&family=Fira+Code:wght@400&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-color: #0f172a;
+            --accent-pink: #ff4d6d;
+            --text-gold: #ffd700;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: #e2e8f0;
+            font-family: 'Fira Code', monospace;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            overflow: hidden;
+        }
+
+        /* حاوية الشاشة كأنها برنامج برمجة */
+        .editor {
+            width: 90%;
+            max-width: 500px;
+            background: #1e293b;
+            border-radius: 15px;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+            border: 1px solid #334155;
+            overflow: hidden;
+        }
+
+        .editor-header {
+            background: #334155;
+            padding: 10px 15px;
+            display: flex;
+            gap: 8px;
+        }
+
+        .dot { width: 12px; height: 12px; border-radius: 50%; }
+        .red { background: #ff5f56; }
+        .yellow { background: #ffbd2e; }
+        .green { background: #27c93f; }
+
+        .content {
+            padding: 25px;
+            min-height: 300px;
+            line-height: 1.6;
+        }
+
+        .typing-text { color: #9cdcfe; }
+        .keyword { color: #c586c0; }
+        .string { color: #ce9178; }
+        .comment { color: #6a9955; font-style: italic; }
+
+        .final-message {
+            font-family: 'Dancing Script', cursive;
+            font-size: 1.8rem;
+            color: var(--accent-pink);
+            margin-top: 20px;
+            opacity: 0;
+            transition: opacity 2s ease-in;
+            text-align: center;
+        }
+
+        .btn-run {
+            background: var(--accent-pink);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 20px;
+            font-family: 'Poppins', sans-serif;
+            font-weight: bold;
+        }
+
+        #cursor {
+            border-left: 2px solid var(--accent-pink);
+            animation: blink 0.7s infinite;
+        }
+
+        @keyframes blink { 50% { opacity: 0; } }
+    </style>
+</head>
+<body>
+
+    <div class="editor">
+        <div class="editor-header">
+            <div class="dot red"></div>
+            <div class="dot yellow"></div>
+            <div class="dot green"></div>
+            <span style="font-size: 0.8rem; color: #94a3b8; margin-left: auto;">bana_love_script.py</span>
+        </div>
+        <div class="content">
+            <div id="code-area"></div>
+            <div id="final-box" class="final-message">
+                Bana... You are the poem my soul always wanted to write. ❤️
+            </div>
+            <center><button class="btn-run" id="runBtn" onclick="runScript()">Run Secret Script</button></center>
+        </div>
+    </div>
+
+    <script>
+        const lines = [
+            '<span class="comment"># Initializing the most beautiful connection...</span>',
+            '<span class="keyword">import</span> love_module <span class="keyword">as</span> heart',
+            '<span class="keyword">def</span> <span style="color:#dcdcaa">my_feelings</span>(bana):',
+            '&nbsp;&nbsp;&nbsp;&nbsp;message = <span class="string">"Since 14/04/2024, my world changed."</span>',
+            '&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span> heart.forever(bana)',
+            '<span class="comment">// Compiling your beauty... Status: 100% Perfect</span>',
+            '<span class="keyword">print</span>(<span class="string">"Bana, you are my Bonbonte."</span>)'
+        ];
+
+        let lineIdx = 0;
+        const codeArea = document.getElementById('code-area');
+
+        function typeCode() {
+            if (lineIdx < lines.length) {
+                let div = document.createElement('div');
+                div.innerHTML = lines[lineIdx];
+                codeArea.appendChild(div);
+                lineIdx++;
+                setTimeout(typeCode, 800);
+            }
+        }
+
+        // نبدأ الكتابة تلقائياً عند الفتح
+        window.onload = typeCode;
+
+        function runScript() {
+            const btn = document.getElementById('runBtn');
+            const final = document.getElementById('final-box');
+            
+            btn.style.display = 'none';
+            final.style.opacity = '1';
+            
+            // إضافة صوت الأغنية إذا أردت كما في المثال السابق
+            alert("Warning: Massive amount of love detected! ❤️");
+        }
+    </script>
+</body>
+</html>
